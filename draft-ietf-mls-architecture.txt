@@ -83,29 +83,29 @@ Table of Contents
      2.3.  Delivery Service  . . . . . . . . . . . . . . . . . . . .   7
        2.3.1.  Key Storage . . . . . . . . . . . . . . . . . . . . .   8
        2.3.2.  Key Retrieval . . . . . . . . . . . . . . . . . . . .   8
-       2.3.3.  Delivery of messages and attachments  . . . . . . . .   8
-       2.3.4.  Membership knowledge  . . . . . . . . . . . . . . . .   9
+       2.3.3.  Delivery of messages and attachments  . . . . . . . .   9
+       2.3.4.  Membership knowledge  . . . . . . . . . . . . . . . .  10
        2.3.5.  Membership and offline members  . . . . . . . . . . .  10
    3.  System Requirements . . . . . . . . . . . . . . . . . . . . .  10
      3.1.  Functional Requirements . . . . . . . . . . . . . . . . .  10
-       3.1.1.  Asynchronous Usage  . . . . . . . . . . . . . . . . .  10
+       3.1.1.  Asynchronous Usage  . . . . . . . . . . . . . . . . .  11
        3.1.2.  Recovery After State Loss . . . . . . . . . . . . . .  11
        3.1.3.  Support for Multiple Devices  . . . . . . . . . . . .  11
        3.1.4.  Extensibility / Pluggability  . . . . . . . . . . . .  11
-       3.1.5.  Privacy . . . . . . . . . . . . . . . . . . . . . . .  11
+       3.1.5.  Privacy . . . . . . . . . . . . . . . . . . . . . . .  12
        3.1.6.  Federation  . . . . . . . . . . . . . . . . . . . . .  12
        3.1.7.  Compatibility with future versions of MLS . . . . . .  12
      3.2.  Security Requirements . . . . . . . . . . . . . . . . . .  12
        3.2.1.  Connections between Clients and Servers
-               (one-to-one)  . . . . . . . . . . . . . . . . . . . .  12
-       3.2.2.  Message Secrecy and Authentication  . . . . . . . . .  12
-   4.  Security Considerations . . . . . . . . . . . . . . . . . . .  15
-     4.1.  Transport Security Links  . . . . . . . . . . . . . . . .  15
-     4.2.  Delivery Service Compromise . . . . . . . . . . . . . . .  15
+               (one-to-one)  . . . . . . . . . . . . . . . . . . . .  13
+       3.2.2.  Message Secrecy and Authentication  . . . . . . . . .  13
+   4.  Security Considerations . . . . . . . . . . . . . . . . . . .  16
+     4.1.  Transport Security Links  . . . . . . . . . . . . . . . .  16
+     4.2.  Delivery Service Compromise . . . . . . . . . . . . . . .  16
      4.3.  Authentication Service Compromise . . . . . . . . . . . .  16
-     4.4.  Client Compromise . . . . . . . . . . . . . . . . . . . .  16
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  16
-   6.  Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  16
+     4.4.  Client Compromise . . . . . . . . . . . . . . . . . . . .  17
+   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  17
+   6.  Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  17
 
 
 
@@ -114,7 +114,7 @@ Omara, et al.            Expires 22 January 2021                [Page 2]
 Internet-Draft              MLS Architecture                   July 2020
 
 
-   7.  Informative References  . . . . . . . . . . . . . . . . . . .  17
+   7.  Informative References  . . . . . . . . . . . . . . . . . . .  18
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  18
 
 1.  Introduction
@@ -268,11 +268,11 @@ Internet-Draft              MLS Architecture                   July 2020
    the group.  MLS is compatible with having group administration
    restricted to certain users, but we assume that those restrictions
    are enforced by authentication and access control at the application
-   layer.  Thus, for instance, while it might be cryptographically
-   possible for any member to send a message adding a new client to a
-   group, the group might have the policy that only certain members are
-   allowed to make changes and thus other members can ignore or reject
-   such a message from an unauthorized user.
+   layer.
+
+
+
+
 
 
 
@@ -281,6 +281,13 @@ Omara, et al.            Expires 22 January 2021                [Page 5]
 
 Internet-Draft              MLS Architecture                   July 2020
 
+
+   Thus, for instance, while the MLS protocol allows for any existing
+   member of a group to add a new client, applications which use MLS
+   might enforce additional restrictions for which only a subset of
+   members can qualify, and thus will handle enforcing group policies
+   (such as determining if a user is allowed to add new users to the
+   group) at the application level.
 
 2.1.  Group, Members and Clients
 
@@ -323,13 +330,6 @@ Internet-Draft              MLS Architecture                   July 2020
    *  A certification authority or similar service which signs some sort
       of portable credential binding an identity to a signature key.
 
-   *  A directory server which provides the key for a given identity
-      (presumably this connection is secured via some form of transport
-      security such as TLS).
-
-   The MLS protocol assumes a signature keypair for authentication of
-   messages.  It is important to note that this signature keypair might
-   be the identity keypair directly, or a different signature keypair
 
 
 
@@ -338,6 +338,13 @@ Omara, et al.            Expires 22 January 2021                [Page 6]
 Internet-Draft              MLS Architecture                   July 2020
 
 
+   *  A directory server which provides the key for a given identity
+      (presumably this connection is secured via some form of transport
+      security such as TLS).
+
+   The MLS protocol assumes a signature keypair for authentication of
+   messages.  It is important to note that this signature keypair might
+   be the identity keypair directly, or a different signature keypair
    for which the public key has been for example signed by the identity
    private key.  This flexibility allows for multiple infrastructure
    considerations and has the benefit of providing ways to use different
@@ -379,13 +386,6 @@ Internet-Draft              MLS Architecture                   July 2020
       broadcaster, taking in one message and forwarding it to multiple
       clients (also known as "server side fanout").
 
-   Because the MLS protocol provides a way for Clients to send and
-   receive application messages asynchronously, it only provides causal
-   ordering of application messages from senders while it has to enforce
-   global ordering of group operations to provide Group Agreement.
-
-
-
 
 
 
@@ -393,6 +393,11 @@ Omara, et al.            Expires 22 January 2021                [Page 7]
 
 Internet-Draft              MLS Architecture                   July 2020
 
+
+   Because the MLS protocol provides a way for Clients to send and
+   receive application messages asynchronously, it only provides causal
+   ordering of application messages from senders while it has to enforce
+   global ordering of group operations to provide Group Agreement.
 
    Depending on the level of trust given by the group to the Delivery
    Service, the functional and privacy guarantees provided by MLS may
@@ -435,13 +440,8 @@ Internet-Draft              MLS Architecture                   July 2020
    to request a KeyPackage for each other client, authenticate it using
    the signature keys, and then can use those to form the group.
 
-2.3.3.  Delivery of messages and attachments
 
-   The main responsibility of the Delivery Service is to ensure delivery
-   of messages.  Specifically, we assume that DSs provide:
 
-   *  Reliable delivery: when a message is provided to the DS, it is
-      eventually delivered to all clients.
 
 
 
@@ -449,6 +449,14 @@ Omara, et al.            Expires 22 January 2021                [Page 8]
 
 Internet-Draft              MLS Architecture                   July 2020
 
+
+2.3.3.  Delivery of messages and attachments
+
+   The main responsibility of the Delivery Service is to ensure delivery
+   of messages.  Specifically, we assume that DSs provide:
+
+   *  Reliable delivery: when a message is provided to the DS, it is
+      eventually delivered to all clients.
 
    *  In-order delivery: messages are delivered to the group in the
       order they are received by the Delivery Service and in
@@ -489,6 +497,15 @@ Internet-Draft              MLS Architecture                   July 2020
    information, other clients cannot generally distinguish this form of
    Denial of Service (DoS) attack.
 
+
+
+
+
+Omara, et al.            Expires 22 January 2021                [Page 9]
+
+Internet-Draft              MLS Architecture                   July 2020
+
+
 2.3.4.  Membership knowledge
 
    Group membership is itself sensitive information and MLS is designed
@@ -498,14 +515,6 @@ Internet-Draft              MLS Architecture                   July 2020
    is known by all clients, hence the server usually does not need this
    information.  However, they may learn this information through
    traffic analysis.  Unfortunately, in a server side fanout model, the
-
-
-
-Omara, et al.            Expires 22 January 2021                [Page 9]
-
-Internet-Draft              MLS Architecture                   July 2020
-
-
    DS can learn that a given client is sending the same message to a set
    of other clients.  In addition, there may be applications of MLS in
    which the group membership list is stored on some server associated
@@ -543,6 +552,16 @@ Internet-Draft              MLS Architecture                   July 2020
    50,000 members, typically including many users using multiple
    devices.
 
+
+
+
+
+
+Omara, et al.            Expires 22 January 2021               [Page 10]
+
+Internet-Draft              MLS Architecture                   July 2020
+
+
 3.1.1.  Asynchronous Usage
 
    No operation in MLS requires two distinct clients or members to be
@@ -553,14 +572,6 @@ Internet-Draft              MLS Architecture                   July 2020
 
    Messaging systems that implement MLS have to provide a transport
    layer for delivering messages asynchronously and reliably.
-
-
-
-
-Omara, et al.            Expires 22 January 2021               [Page 10]
-
-Internet-Draft              MLS Architecture                   July 2020
-
 
 3.1.2.  Recovery After State Loss
 
@@ -592,6 +603,21 @@ Internet-Draft              MLS Architecture                   July 2020
    payload with the purpose of sharing that payload between group
    members.  No assumptions are made about the format of the payload.
 
+
+
+
+
+
+
+
+
+
+
+Omara, et al.            Expires 22 January 2021               [Page 11]
+
+Internet-Draft              MLS Architecture                   July 2020
+
+
 3.1.5.  Privacy
 
    The protocol is designed in a way that limits the server-side (AS and
@@ -605,18 +631,6 @@ Internet-Draft              MLS Architecture                   July 2020
    [[OPEN ISSUE: These privacy statements seem very strong.  BB.  I
    would be willing to keep them as requirements since we have example
    solutions in the Server-Assist draft.]]
-
-
-
-
-
-
-
-
-Omara, et al.            Expires 22 January 2021               [Page 11]
-
-Internet-Draft              MLS Architecture                   July 2020
-
 
 3.1.6.  Federation
 
@@ -645,6 +659,21 @@ Internet-Draft              MLS Architecture                   July 2020
 
 3.2.  Security Requirements
 
+
+
+
+
+
+
+
+
+
+
+Omara, et al.            Expires 22 January 2021               [Page 12]
+
+Internet-Draft              MLS Architecture                   July 2020
+
+
 3.2.1.  Connections between Clients and Servers (one-to-one)
 
    We assume that all transport connections are secured via some
@@ -665,14 +694,6 @@ Internet-Draft              MLS Architecture                   July 2020
 
    MLS aims to provide secrecy, integrity and authentication for all
    messages.
-
-
-
-
-Omara, et al.            Expires 22 January 2021               [Page 12]
-
-Internet-Draft              MLS Architecture                   July 2020
-
 
    Message Secrecy in the context of MLS means that only intended
    recipients (current group members), can read any message sent to the
@@ -698,6 +719,17 @@ Internet-Draft              MLS Architecture                   July 2020
    Message content can be deniable if the signature keys are exchanged
    over a deniable channel prior to signing messages.
 
+
+
+
+
+
+
+Omara, et al.            Expires 22 January 2021               [Page 13]
+
+Internet-Draft              MLS Architecture                   July 2020
+
+
 3.2.2.1.  Forward and Post-Compromise Security
 
    MLS provides additional protection regarding secrecy of past messages
@@ -722,14 +754,6 @@ Internet-Draft              MLS Architecture                   July 2020
    the attacker is unable to violate any of the MLS security properties
    after the updates have been processed.
 
-
-
-
-Omara, et al.            Expires 22 January 2021               [Page 13]
-
-Internet-Draft              MLS Architecture                   July 2020
-
-
    Both of these properties are satisfied even against compromised DSs
    and ASs.
 
@@ -752,6 +776,15 @@ Internet-Draft              MLS Architecture                   July 2020
    might want a more strict policy and allow only the owner of the
    devices to add or remove them at the potential cost of weaker PCS
    guarantees.
+
+
+
+
+
+Omara, et al.            Expires 22 January 2021               [Page 14]
+
+Internet-Draft              MLS Architecture                   July 2020
+
 
    Members who are removed from a group do not enjoy special privileges:
    compromise of a removed group member does not affect the security of
@@ -778,14 +811,6 @@ Internet-Draft              MLS Architecture                   July 2020
    messages, hence slightly weakening the PCS guarantees for
    attachments.
 
-
-
-
-Omara, et al.            Expires 22 January 2021               [Page 14]
-
-Internet-Draft              MLS Architecture                   July 2020
-
-
 3.2.2.5.  Denial of Service
 
    In general we do not consider Denial of Service (DoS) resistance to
@@ -806,6 +831,16 @@ Internet-Draft              MLS Architecture                   July 2020
    repudiation"), but it should also be possible to operate MLS in a
    "deniable" mode where such proof is not possible.  [[OPEN ISSUE:
    Exactly how to supply this is still a protocol question.]]
+
+
+
+
+
+
+Omara, et al.            Expires 22 January 2021               [Page 15]
+
+Internet-Draft              MLS Architecture                   July 2020
+
 
 4.  Security Considerations
 
@@ -834,14 +869,6 @@ Internet-Draft              MLS Architecture                   July 2020
    including total DoS attacks (where it simply refuses to forward any
    messages) and partial DoS attacks (where it refuses to forward
    messages to and from specific clients).  As noted in Section 2.3.3,
-
-
-
-Omara, et al.            Expires 22 January 2021               [Page 15]
-
-Internet-Draft              MLS Architecture                   July 2020
-
-
    these attacks are only partially detectable by clients without an
    out-of-band channel.  Ultimately, failure of the DS to provide
    reasonable service must be dealt with as a customer service matter,
@@ -860,6 +887,16 @@ Internet-Draft              MLS Architecture                   July 2020
    detecting this form of attack requires some sort of transparency/
    logging mechanism.  Without such a mechanism, MLS cannot detect a
    compromised AS.
+
+
+
+
+
+
+Omara, et al.            Expires 22 January 2021               [Page 16]
+
+Internet-Draft              MLS Architecture                   July 2020
+
 
 4.4.  Client Compromise
 
@@ -890,14 +927,6 @@ Internet-Draft              MLS Architecture                   July 2020
 
       University of Oxford
 
-
-
-
-Omara, et al.            Expires 22 January 2021               [Page 16]
-
-Internet-Draft              MLS Architecture                   July 2020
-
-
       me@katriel.co.uk
 
    *  Cas Cremers
@@ -917,6 +946,13 @@ Internet-Draft              MLS Architecture                   July 2020
       Facebook
 
       jmillican@fb.com
+
+
+
+Omara, et al.            Expires 22 January 2021               [Page 17]
+
+Internet-Draft              MLS Architecture                   July 2020
+
 
    *  Raphael Robert
 
@@ -947,13 +983,6 @@ Internet-Draft              MLS Architecture                   July 2020
               Representation (CBOR)", RFC 7049, DOI 10.17487/RFC7049,
               October 2013, <https://www.rfc-editor.org/info/rfc7049>.
 
-
-
-Omara, et al.            Expires 22 January 2021               [Page 17]
-
-Internet-Draft              MLS Architecture                   July 2020
-
-
    [RFC7159]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
               2014, <https://www.rfc-editor.org/info/rfc7159>.
@@ -972,6 +1001,14 @@ Authors' Addresses
 
    Benjamin Beurdouche
    INRIA
+
+
+
+
+Omara, et al.            Expires 22 January 2021               [Page 18]
+
+Internet-Draft              MLS Architecture                   July 2020
+
 
    Email: benjamin.beurdouche@inria.fr
 
@@ -1005,4 +1042,23 @@ Authors' Addresses
 
 
 
-Omara, et al.            Expires 22 January 2021               [Page 18]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Omara, et al.            Expires 22 January 2021               [Page 19]
