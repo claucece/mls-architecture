@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-07-23T00:21:12.999141+00:00",
+  "timestamp": "2020-07-26T00:22:21.290685+00:00",
   "repo": "mlswg/mls-architecture",
   "labels": [
     {
@@ -339,15 +339,47 @@
       "author": "beurdouche",
       "authorAssociation": "MEMBER",
       "assignees": [
+        "bifurcation",
         "beurdouche",
-        "cascremers"
+        "cascremers",
+        "claucece",
+        "raphaelrobert"
       ],
       "labels": [],
       "body": "- [ ]  Forward secrecy\r\n\r\nSof\u00eda noted: \"We are also unsure on the 'type' of forward secrecy provided. The Signal's X3DH\r\nprotocol, for example, provides a forward secrecy between strong and weak. We\r\nare unsure if the way the Delivery Service, as defined in MLS, when providing the\r\nauthentication keys and initial keying material, achieves which type of forward\r\nsecrecy. But, of course, this can be a misunderstood from our side.\"",
       "createdAt": "2019-02-14T08:06:15Z",
-      "updatedAt": "2019-02-14T08:32:49Z",
+      "updatedAt": "2020-07-23T08:47:53Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "claucece",
+          "authorAssociation": "NONE",
+          "body": "Mmm.. not sure what is the state of this now @beurdouche .. but I can take a look the upcoming week... is it useful for IETF018?",
+          "createdAt": "2020-07-23T07:56:27Z",
+          "updatedAt": "2020-07-23T07:56:27Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Hi Sof\u00eda, no need to take action yet. I have to check if I can make the 108 meeting but the current plan is\r\n(I have yet to send an email to the ML) that I will take significant time in **September** to rewrite the security guarantees we expect from MLS according to the protocol we have then. I'll open a large discussion with the WG to make sure we have a really comprehensive section for security considerations :) \r\nIn the meantime feel free to keep opening issues for the document, that will help making sure we don't forget anything then ;)",
+          "createdAt": "2020-07-23T08:38:23Z",
+          "updatedAt": "2020-07-23T08:47:53Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "CC. @kkohbrok @br-hale @psyoptix @karthikbhargavan \r\n(Apparently, I can't assign you with me for some reason, but the intent is there...)",
+          "createdAt": "2020-07-23T08:45:41Z",
+          "updatedAt": "2020-07-23T08:47:10Z"
+        },
+        {
+          "author": "claucece",
+          "authorAssociation": "NONE",
+          "body": "Oh, for sure @beurdouche ! I'll open some issues by rereading the current state of the drafts (which I haven't read in a while ;)) Happy to help you on that on September as well ;)\r\n\r\nI think this links also to the #50 issue. ",
+          "createdAt": "2020-07-23T08:46:31Z",
+          "updatedAt": "2020-07-23T08:46:31Z"
+        }
+      ]
     },
     {
       "number": 49,
@@ -581,7 +613,7 @@
       "id": "MDU6SXNzdWU2NjI4NjEzODY=",
       "title": "Editor's copy points to a 404.",
       "url": "https://github.com/mlswg/mls-architecture/issues/70",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "beurdouche",
       "authorAssociation": "MEMBER",
       "assignees": [],
@@ -590,8 +622,8 @@
       ],
       "body": "The build and GH actions script seem to work now, thanks @Bren2010 .\r\n\r\nThe README points to an Editor's copy which is 404.\r\nhttps://mlswg.github.io/mls-architecture/#go.draft-ietf-mls-architecture.html\r\n\r\nThe artifact seem to build properly though:\r\nhttps://github.com/mlswg/mls-architecture/actions/runs/176901329\r\n\r\n@katrielalex @Bren2010 Are we missing a redirect or something?",
       "createdAt": "2020-07-21T10:36:14Z",
-      "updatedAt": "2020-07-21T16:18:39Z",
-      "closedAt": null,
+      "updatedAt": "2020-07-23T09:05:31Z",
+      "closedAt": "2020-07-23T09:05:31Z",
       "comments": [
         {
           "author": "Bren2010",
@@ -599,6 +631,41 @@
           "body": "- It doesn't look like Pages it on. You can try turning it off and back on in the Settings tab and that will trigger a new deploy.\r\n- Leave the domain for Pages as the default, not \"architecture.messaginglayersecurity.rocks\" or something similar",
           "createdAt": "2020-07-21T16:12:07Z",
           "updatedAt": "2020-07-21T16:18:39Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "@katrielalex I think, only you can do that, I only have write access, so I don't have the \"Settings\" tab... :/",
+          "createdAt": "2020-07-23T08:50:26Z",
+          "updatedAt": "2020-07-23T08:50:26Z"
+        },
+        {
+          "author": "katrielalex",
+          "authorAssociation": "MEMBER",
+          "body": "Hm strange: \r\n![image](https://user-images.githubusercontent.com/315959/88268657-b5932180-ccca-11ea-92fa-f77069f7784c.png)\r\n",
+          "createdAt": "2020-07-23T08:56:27Z",
+          "updatedAt": "2020-07-23T08:56:27Z"
+        },
+        {
+          "author": "katrielalex",
+          "authorAssociation": "MEMBER",
+          "body": "Turned it off and on again and now I see\r\n\r\n![image](https://user-images.githubusercontent.com/315959/88269008-33efc380-cccb-11ea-9de9-b7367e31baf6.png)\r\n",
+          "createdAt": "2020-07-23T08:59:37Z",
+          "updatedAt": "2020-07-23T08:59:37Z"
+        },
+        {
+          "author": "katrielalex",
+          "authorAssociation": "MEMBER",
+          "body": "mls-protocol shows\r\n\r\n![image](https://user-images.githubusercontent.com/315959/88269046-4538d000-cccb-11ea-8dc5-0569cf9b6820.png)\r\n\r\nso I think this might just need another commit to trigger the build",
+          "createdAt": "2020-07-23T09:00:08Z",
+          "updatedAt": "2020-07-23T09:00:08Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Yay, it seems to work now !! \ud83d\udc4d Thanks a lot Katriel and Brendan !!",
+          "createdAt": "2020-07-23T09:05:31Z",
+          "updatedAt": "2020-07-23T09:05:31Z"
         }
       ]
     },
