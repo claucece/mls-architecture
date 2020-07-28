@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2020-07-26T00:22:21.290685+00:00",
+  "timestamp": "2020-07-28T00:21:57.305984+00:00",
   "repo": "mlswg/mls-architecture",
   "labels": [
     {
@@ -682,6 +682,26 @@
       "body": "In the section \"Groups, Members, and Clients\", the definition of a group in MLS is the set of clients that have knowledge of the shared group key, which is established in the group key exchange. \r\n\r\nThe spec then goes on to say that \"Until a Member has contributed to the group secret, other members cannot assume she is a member of the group.\"\r\n\r\nThis phrasing of what constitutes a group member is quite weak and does not actually reflect the security properties of the underlying group key exchange. If a member has not contributed to the shared group secret, she cannot be considered a member of the group, as 1) she should not be able to learn the group key  (without acting adversarially outside of the protocol), and 2) other members cannot verify her membership\r\n\r\nInstead, I would rephrase this description of a member/non-member to say something stronger, like \"Until a Member has been added to the group by another member---thereby requiring that she contributes to the group secret in this process in such a way that is verifiable to other group members--she will not be able to participate as a member of the group.\"",
       "createdAt": "2020-07-22T23:38:36Z",
       "updatedAt": "2020-07-22T23:38:36Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 72,
+      "id": "MDU6SXNzdWU2NjU3Mzc0Mjg=",
+      "title": "Open a section for attacks outside the threat model?",
+      "url": "https://github.com/mlswg/mls-architecture/issues/72",
+      "state": "OPEN",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [
+        "beurdouche"
+      ],
+      "labels": [
+        "editorial"
+      ],
+      "body": "",
+      "createdAt": "2020-07-26T08:42:38Z",
+      "updatedAt": "2020-07-26T08:42:38Z",
       "closedAt": null,
       "comments": []
     }
